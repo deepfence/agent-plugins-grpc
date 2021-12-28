@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package open_tracer;
+option go_package = "github.com/deepfence/agent-plugin-grpc/proto";
+
+service KernelOpenTracer {
+    rpc GetTraceInfo (TraceInfoRequest) returns (stream TraceInfo);
+}
+
+message TraceInfo {
+    string path = 1;
+}
+
+message TraceInfoRequest {
+    string pid = 1;
+}
