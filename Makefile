@@ -5,6 +5,6 @@ go:
     proto/*.proto
 
 clean:
-	rm ./proto/*.go
+	rm -rf ./proto/*.go
 
 .PHONY: clean go
