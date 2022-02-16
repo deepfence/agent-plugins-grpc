@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package syft_plugin;
+package package_scanner;
 option go_package = "github.com/deepfence/agent-plugin-grpc/proto";
 import "google/protobuf/any.proto";
 
-service SyftPlugin {
-    rpc GetVulnerabilitySBOM(SBOMRequest) returns (SBOMResult);
+service PackageScanner {
+    rpc GenerateSBOM(SBOMRequest) returns (SBOMResult);
 }
 
 message SBOMRequest {
