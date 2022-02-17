@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package package_scanner;
 option go_package = "github.com/deepfence/agent-plugin-grpc/proto";
-import "google/protobuf/any.proto";
 
 service PackageScanner {
   rpc GenerateSBOM(SBOMRequest) returns (SBOMResult);
