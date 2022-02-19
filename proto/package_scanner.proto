@@ -10,6 +10,12 @@ service PackageScanner {
 message SBOMRequest {
   string source = 1;
   string scan_type = 2;
+  string container_name = 3;
+  string kubernetes_cluster_name = 4;
+  string image_id = 5;
+  string scan_id = 6;
+  string node_type = 7;
+  string host_name = 8;
 }
 
 message SBOMResult {
