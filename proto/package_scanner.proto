@@ -16,6 +16,7 @@ message SBOMRequest {
   string scan_id = 6;
   string node_type = 7;
   string host_name = 8;
+  string registry_id = 9;
 }
 
 message SBOMResult {
