@@ -14,6 +14,7 @@ message Metrics {
     uint64 event_failure_count = 1;
     uint64 event_success_count = 2;
     uint64 ebf_buffer_capacity = 3;
+    uint64 event_skip_count = 4;
 }
 
 message KernelVersion {
