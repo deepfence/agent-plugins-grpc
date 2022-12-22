@@ -23,5 +23,5 @@ message SBOMRequest {
 
 message SBOMResult {
   string sbom = 1;
-  string sbo_path = 2;
+  string sbom_path = 2;
 }
