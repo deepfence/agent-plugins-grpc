@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package scanners;
+option go_package = "github.com/deepfence/agent-plugin-grpc/proto";
+
+import "common.proto";
+
+service Scanners {
+    rpc ReportJobsStatus(common.Empty) returns (JobReports);
+}
+
+message JobReports {
+    int32 running_jobs = 1;
+}
