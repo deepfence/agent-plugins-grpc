@@ -16,4 +16,3 @@
 # vendor/
 
 .idea
-proto/*.pb.go
