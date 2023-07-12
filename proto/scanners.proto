@@ -15,7 +15,7 @@ message StopScanRequest {
 }
 
 message StopScanResult {
-	bool status = 1;
+	bool success = 1;
 	string description = 2;
 }
 
