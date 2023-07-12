@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	Scanners_ReportJobsStatus_FullMethodName = "/scanners.Scanners/ReportJobsStatus"
+	Scanners_StopScan_FullMethodName         = "/scanners.Scanners/StopScan"
 )
 
 // ScannersClient is the client API for Scanners service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ScannersClient interface {
 	ReportJobsStatus(ctx context.Context, in *Empty, opts ...grpc.CallOption) (*JobReports, error)
+	StopScan(ctx context.Context, in *StopScanRequest, opts ...grpc.CallOption) (*StopScanResult, error)
 }
 
 type scannersClient struct {
@@ -46,11 +48,21 @@ func (c *scannersClient) ReportJobsStatus(ctx context.Context, in *Empty, opts .
 	return out, nil
 }
 
+func (c *scannersClient) StopScan(ctx context.Context, in *StopScanRequest, opts ...grpc.CallOption) (*StopScanResult, error) {
+	out := new(StopScanResult)
+	err := c.cc.Invoke(ctx, Scanners_StopScan_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ScannersServer is the server API for Scanners service.
 // All implementations must embed UnimplementedScannersServer
 // for forward compatibility
 type ScannersServer interface {
 	ReportJobsStatus(context.Context, *Empty) (*JobReports, error)
+	StopScan(context.Context, *StopScanRequest) (*StopScanResult, error)
 	mustEmbedUnimplementedScannersServer()
 }
 
@@ -60,6 +72,9 @@ type UnimplementedScannersServer struct {
 
 func (UnimplementedScannersServer) ReportJobsStatus(context.Context, *Empty) (*JobReports, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportJobsStatus not implemented")
+}
+func (UnimplementedScannersServer) StopScan(context.Context, *StopScanRequest) (*StopScanResult, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopScan not implemented")
 }
 func (UnimplementedScannersServer) mustEmbedUnimplementedScannersServer() {}
 
@@ -92,6 +107,24 @@ func _Scanners_ReportJobsStatus_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Scanners_StopScan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StopScanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ScannersServer).StopScan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Scanners_StopScan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ScannersServer).StopScan(ctx, req.(*StopScanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Scanners_ServiceDesc is the grpc.ServiceDesc for Scanners service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var Scanners_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportJobsStatus",
 			Handler:    _Scanners_ReportJobsStatus_Handler,
+		},
+		{
+			MethodName: "StopScan",
+			Handler:    _Scanners_StopScan_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
